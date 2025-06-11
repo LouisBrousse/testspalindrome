@@ -4,34 +4,20 @@ class Ohce:
         return"Bonjour \n"
 
     def au_revoir(self):
-        return 
+        return "Au revoir"
     
-    
-    def biendit(self, chaine):
+    def miroir(self, chaine):
         if chaine == chaine[::-1]:
-            return chaine + "Bien dit \n"
+            return chaine + ", bien dit \n"
         else :
-            return chaine[::-1]
+            return chaine[::-1] + " \n"
 
     def palindrome(self, chaine):
-        reponse=self.ditbonjour()    # def demandechaine():
+        reponse=self.ditbonjour()  
 
-        # Inverser la chaîne de caractères
-        
-        # if chaine == chaine_inverse:
-            # return chaine_inverse + self.biendit
-        reponse += self.biendit(chaine)
+        reponse += self.miroir(chaine)
         
         reponse += self.au_revoir()
 
         return reponse
     
-
-
-
-    
-    def detecteur(chaine):
-        if chaine == chaine[::-1]:
-            return Ohce.biendit(chaine)
-        else:
-            return Ohce.palindrome(chaine)
