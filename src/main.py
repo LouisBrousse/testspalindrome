@@ -8,7 +8,7 @@ class Ohce:
     
     def miroir(self, chaine):
         if chaine == chaine[::-1]:
-            return chaine + ", bien dit \n"
+            return chaine + "\n"+ "Bien dit \n"
         else :
             return chaine[::-1] + " \n"
 

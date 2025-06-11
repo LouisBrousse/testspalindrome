@@ -14,7 +14,7 @@ def test_bonjour():
     # QUAND on l'envoie au détecteur de palindrome
     result = Ohce().palindrome(chaine)
     # ALORS IL RENVOI bonjour au début
-    assert result,"Bonjour \n"+ "seretcarac \n"
+    assert result.startswith("Bonjour \n")
 
 def test_aurevoir():
     # ETANT DONNE une chainbe de caractères
@@ -23,6 +23,7 @@ def test_aurevoir():
     result = Ohce().palindrome(chaine)
     # ALORS IL RENVOI Aurevoir a la fin
     assert "Bonjour \n" + "seretcarac \n" + "Au revoir"
+    assert result.endswith("Au revoir")
 
 def test_kayak():
     # ETANT DONNE une chainbe de caractères
@@ -30,5 +31,5 @@ def test_kayak():
     # QUAND on l'envoie au détecteur de palindrome
     result = Ohce().palindrome(chaine)
     # ALORS IL RENVOI Aurevoir a la fin
-    assert "Bonjour \n" + "kayak, bien dit \n" + "Au revoir"
+    assert result == "Bonjour \n" + "kayak\n" + "Bien dit \n" + "Au revoir"
 
