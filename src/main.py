@@ -1,9 +1,8 @@
 from src.DetecteurPalindrome import DetecteurPalindrome
 
-class Ohce:
 
-    def decterpalindrome(chaine):
-        DetecteurPalindrome(chaine).miroir()
-        toto = DetecteurPalindrome(chaine).miroir()
-        return toto
-
+detecteur = new DetecteurPalindrome("caracteres")
+def main():
+    chaine = "caracteres"
+    result = detecteur.miroir()
+    print(result)
