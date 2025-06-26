@@ -31,3 +31,12 @@ def test_non_bien_dit():
     # ALORS IL RENVOI la chaîne à l'envers sans "Bien dit!"
     assert "Bien dit!" not in result
     assert "olleh" in result
+
+def test_bonjour(capsys):
+    # ETANT DONNE une chaine de caractères
+    chaine = "test"
+    # QUAND on l'envoie au détecteur de palindrome
+    result = DetecteurPalindrome.miroir(chaine)
+    # ALORS IL DIT Bonjour avant de répondre
+    captured = capsys.readouterr()
+    assert captured.out.startswith("Bonjour!")
