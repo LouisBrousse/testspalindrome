@@ -1,10 +1,14 @@
-from .Paroles import Paroles
+from src.langues.Ilangue import Ilangue
 
 class DetecteurPalindrome:
 
-    @staticmethod
-    def miroir(chaine):
+    def __init__(self, langue: Ilangue):
+        self.langue = langue
+
+
+    
+    def miroir(self, chaine):
         if chaine == chaine[::-1]:
-            return Paroles.bonjour() + " " + chaine + Paroles.felicitation() + " " + Paroles.aurevoir()
+            return f"{self.langue.salutations}\n{chaine}\n{self.langue.felicitations}\n{self.langue.acquittance}"
         else:            
-            return Paroles.bonjour() + " " + chaine[::-1] + " " + Paroles.aurevoir()
+            return f"{self.langue.salutations}\n{chaine[::-1]}\n{self.langue.acquittance}"

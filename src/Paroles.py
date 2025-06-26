@@ -1,11 +1,11 @@
 class Paroles:
 
     @staticmethod
-    def bonjour():
+    def salutations():
             return "Bonjour"
     @staticmethod
     def aurevoir():
             return "Aurevoir"
     @staticmethod
-    def felicitation():
+    def felicitations():
             return "Bien dit!"    

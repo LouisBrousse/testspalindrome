@@ -1,4 +1,5 @@
 from DetecteurPalindrome import DetecteurPalindrome
+from src.langues.LangueFrancaise import LangueFrancaise
 
 def main():
 
@@ -6,7 +7,7 @@ def main():
        
             entree = input("> ")
             
-            print( DetecteurPalindrome.miroir(entree))
+            print(DetecteurPalindrome(LangueFrancaise()).miroir(entree))
          
 
 if __name__ == "__main__":
