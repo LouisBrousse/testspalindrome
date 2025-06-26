@@ -4,6 +4,7 @@ def test_nominal():
     chaine = "caracteres"
     
     # QUAND on l'envoie au détecteur de palindrome
-    result = DetecteurPalindrome.miroir(chaine)
+    dp = DetecteurPalindrome(chaine)
+    result = dp.miroir()
     # ALORS IL RENVOI la chaîne à l'envers
     assert "seretcarac \n" in result
