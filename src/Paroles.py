@@ -6,4 +6,6 @@ class Paroles:
     @staticmethod
     def aurevoir():
             return "Aurevoir"
-        
+    @staticmethod
+    def felicitation():
+            return "Bien dit!"    
