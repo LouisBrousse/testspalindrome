@@ -1,4 +1,5 @@
 from src.DetecteurPalindrome import DetecteurPalindrome 
+
 def test_nominal():
     # ETANT DONNE une chaine de caractères
     chaine = "caracteres"
@@ -32,11 +33,11 @@ def test_non_bien_dit():
     assert "Bien dit!" not in result
     assert "olleh" in result
 
-def test_bonjour(capsys):
+def test_bonjour():
     # ETANT DONNE une chaine de caractères
     chaine = "test"
     # QUAND on l'envoie au détecteur de palindrome
     result = DetecteurPalindrome.miroir(chaine)
     # ALORS IL DIT Bonjour avant de répondre
-    captured = capsys.readouterr()
-    assert captured.out.startswith("Bonjour!")
+    assert result.startswith("Bonjour")
+    

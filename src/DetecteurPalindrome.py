@@ -1,11 +1,10 @@
+from .Paroles import Paroles
+
 class DetecteurPalindrome:
-    
 
     @staticmethod
     def miroir(chaine):
         if chaine == chaine[::-1]:
-            return chaine + " Bien dit!"
+            return Paroles.bonjour() + " " + chaine + " Bien dit!"
         else:            
-            return chaine[::-1]
-
-    
+            return Paroles.bonjour() + " " + chaine[::-1]

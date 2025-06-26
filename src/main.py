@@ -5,7 +5,8 @@ def main():
     while True:
        
             entree = input("> ")
-            print(entree + " => " + DetecteurPalindrome.miroir(entree))
+            
+            print( DetecteurPalindrome.miroir(entree))
          
 
 if __name__ == "__main__":
