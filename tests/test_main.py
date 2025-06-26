@@ -40,4 +40,14 @@ def test_bonjour():
     result = DetecteurPalindrome.miroir(chaine)
     # ALORS IL DIT Bonjour avant de répondre
     assert result.startswith("Bonjour")
+    assert "tset" in result
+
+def test_aurevoir():
+    # ETANT DONNE une chaine de caractères
+    chaine = "test"
+    # QUAND on l'envoie au détecteur de palindrome
+    result = DetecteurPalindrome.miroir(chaine)
+    # ALORS IL DIT Aurevoir après avoir répondu
+    assert result.endswith("Aurevoir")
+    assert "tset" in result
     
