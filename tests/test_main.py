@@ -1,4 +1,7 @@
 
+from src.langues.LangueAnglaise import LangueAnglaise
+from src.langues.LangueFrancaise import LangueFrancaise
+import pytest
 from .utils.DetecteurPalindrome_builder import DetecteurPalindromeBuilder 
 
 def test_nominal():
@@ -19,9 +22,7 @@ def test_palindrome():
     # ALORS IL RENVOI la chaîne à l'envers
     assert "kayak" in result
 
-from src.langues.LangueAnglaise import LangueAnglaise
-from src.langues.LangueFrancaise import LangueFrancaise
-import pytest
+
 @pytest.mark.parametrize("langue", [
     LangueFrancaise(),
     LangueAnglaise(),
@@ -39,14 +40,21 @@ def test_bien_dit(langue):
     # ALORS IL RENVOI la chaîne à l'envers avec "Bien dit!"
     assert langue.felicitations in result
 
-# def test_non_bien_dit():
-#     # ETANT DONNE une chaine de caractères non palindrome
-#     chaine = "hello"
-#     # QUAND on l'envoie au détecteur de palindrome
-#     result = DetecteurPalindrome.miroir(chaine)
-#     # ALORS IL RENVOI la chaîne à l'envers sans "Bien dit!"
-#     assert "Bien dit!" not in result
-#     assert "olleh" in result
+@pytest.mark.parametrize("langue", [
+    LangueFrancaise(),
+    LangueAnglaise(),
+])
+
+def test_non_bien_dit(langue):
+    # ETANT DONNE une chaine de caractères non palindrome
+    chaine = "hello"
+    # QUAND on l'envoie au détecteur de palindrome
+    fake_felicitations = "BRAVO"
+    dp = DetecteurPalindromeBuilder().avec_langue(langue).build()
+    result = dp.miroir(chaine)
+    # ALORS IL RENVOI la chaîne à l'envers sans "Bien dit!"
+    assert  langue.felicitations not in result
+    assert "olleh" in result
 
 # def test_bonjour():
 #     # ETANT DONNE une chaine de caractères
