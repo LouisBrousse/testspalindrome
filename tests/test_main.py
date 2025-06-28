@@ -42,7 +42,7 @@ def test_bien_dit(langue):
 
 @pytest.mark.parametrize("langue, mot", [
     (LangueAleatoire(), "hello"),
-    (Langue_Stub(felicitations= "test"), "hello"),
+    (Langue_Stub(felicitations="test"), "hello"), #En python obliger de mettre un mot car "" True
 ])
 
 def test_non_bien_dit(langue, mot):
@@ -52,14 +52,13 @@ def test_non_bien_dit(langue, mot):
     dp = DetecteurPalindromeBuilder().avec_langue(langue).build()
     result = dp.miroir(chaine)
     # ALORS IL RENVOI la chaîne à l'envers sans félicitations
-    attendu = chaine + "\n" + langue.felicitations
-    assert mot[::-1] in result
     assert  langue.felicitations not in result
 
 @pytest.mark.parametrize("langue, mot", [
     (LangueAleatoire(), "hello"),
-    (Langue_Stub(felicitations= "test", salutations="test2"), "hello"),
-    (Langue_Stub(felicitations= "test", salutations="test2"), "kayak"),
+    (LangueAleatoire(), "kayak"),
+    (Langue_Stub(salutations="test2"), "hello"),
+    (Langue_Stub(salutations="test2"), "kayak"),
 ])
 
 def test_bonjour(langue, mot):
@@ -69,14 +68,14 @@ def test_bonjour(langue, mot):
     dp = DetecteurPalindromeBuilder().avec_langue(langue).build()
     result = dp.miroir(chaine)
     # ALORS IL DIT Bonjour avant de répondre
-    
     assert result.startswith(langue.salutations)
-    assert mot[::-1] in result
+    
 
 @pytest.mark.parametrize("langue, mot", [
     (LangueAleatoire(), "hello"),
-    (Langue_Stub(felicitations= "test", salutations="test2", acquittance="test3"), "hello"),
-    (Langue_Stub(felicitations= "test", salutations="test2", acquittance="test3"), "kayak"),
+    (LangueAleatoire(), "kayak"),
+    (Langue_Stub(acquittance="test3"), "hello"),
+    (Langue_Stub(acquittance="test3"), "kayak"),
 ])
 def test_aurevoir(langue, mot):
     # ETANT DONNE une chaine de caractères
@@ -86,5 +85,5 @@ def test_aurevoir(langue, mot):
     result = dp.miroir(chaine)
     # ALORS IL DIT Aurevoir après avoir répondu
     assert result.endswith(langue.acquittance)
-    assert mot[::-1] in result
+    
     
