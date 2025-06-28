@@ -63,11 +63,14 @@ def test_non_bien_dit(langue, mot):
 def test_bonjour(langue, mot):
     # ETANT DONNE une chaine de caractères
     chaine = mot
+    # ET un détecteure avec une langue une heure fixe
+    heure = "12:00"
+    dp = DetecteurPalindromeBuilder().avec_langue(langue).avec_heure_fixe_a(heure).build()
+
     # QUAND on l'envoie au détecteur de palindrome
-    dp = DetecteurPalindromeBuilder().avec_langue(langue).build()
     result = dp.miroir(chaine)
     # ALORS IL DIT Bonjour avant de répondre
-    assert result.startswith(langue.salutations)
+    assert result.startswith(langue.salutations(heure))
     
 
 @pytest.mark.parametrize("langue, mot", [
@@ -86,4 +89,7 @@ def test_aurevoir(langue, mot):
     # ALORS IL DIT Aurevoir après avoir répondu
     assert result.endswith(langue.acquittance)
     
-    
+    # 6:00 - 11h59 - Matin
+    # 12:00 - 17h59 - Après-midi
+    # 18:00 - 20h59 - Soirée
+    # 21h - 5:59 - Nuit
