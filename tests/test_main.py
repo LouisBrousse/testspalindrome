@@ -1,6 +1,7 @@
 
 from .utils.Langue_Stub import Langue_Stub
 from .utils.LangueAleatoire import LangueAleatoire
+import datetime
 
 import pytest
 from .utils.DetecteurPalindrome_builder import DetecteurPalindromeBuilder 
@@ -53,24 +54,24 @@ def test_non_bien_dit(langue, mot):
     # ALORS IL RENVOI la chaîne à l'envers sans félicitations
     assert  langue.felicitations not in result
 
-@pytest.mark.parametrize("langue, mot", [
-    (LangueAleatoire(), "hello"),
-    (LangueAleatoire(), "kayak"),
-    (Langue_Stub(salutations="test2"), "hello"),
-    (Langue_Stub(salutations="test2"), "kayak"),
+@pytest.mark.parametrize("langue, mot, heureTestee",[
+    (LangueAleatoire(), "hello", datetime.time(6, 0)),
+    (LangueAleatoire(), "kayak", datetime.time(6, 0)),
+    (Langue_Stub(salutations="test2"), "hello", datetime.time(6, 0)),
+    (Langue_Stub(salutations="test2"), "kayak", datetime.time(6, 0)),
 ])
 
-def test_bonjour(langue, mot):
+def test_bonjour(langue, mot, heureTestee):
     # ETANT DONNE une chaine de caractères
     chaine = mot
     # ET un détecteure avec une langue une heure fixe
-    heure = "12:00"
+    heure = heureTestee 
     dp = DetecteurPalindromeBuilder().avec_langue(langue).avec_heure_fixe_a(heure).build()
 
     # QUAND on l'envoie au détecteur de palindrome
     result = dp.miroir(chaine)
     # ALORS IL DIT Bonjour avant de répondre
-    assert result.startswith(langue.salutations(heure))
+    assert result.startswith(langue.salutations(heureTestee))
     
 
 @pytest.mark.parametrize("langue, mot", [
