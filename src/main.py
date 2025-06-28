@@ -1,5 +1,5 @@
 from DetecteurPalindrome import DetecteurPalindrome
-from src.langues.LangueFrancaise import LangueFrancaise
+from langues.LangueFrancaise import LangueFrancaise
 
 def main():
 

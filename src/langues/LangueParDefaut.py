@@ -1,4 +1,4 @@
-from src.langues.Ilangue import Ilangue
+from langues.Ilangue import Ilangue
 
 class LangueParDefaut(Ilangue):
     @property

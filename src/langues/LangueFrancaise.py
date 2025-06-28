@@ -6,7 +6,7 @@ class LangueFrancaise(Ilangue):
         return "Bonjour"
     @property
     def felicitations(self):
-        return "Félicitations"
+        return "Bien dit"
     @property
     def acquittance(self):
         return "Au revoir"
