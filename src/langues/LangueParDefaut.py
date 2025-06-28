@@ -1,8 +1,8 @@
 from langues.Ilangue import Ilangue
 
 class LangueParDefaut(Ilangue):
-    @property
-    def salutations(self):
+    
+    def salutations(self, heure):
         return ""
     @property
     def felicitations(self):

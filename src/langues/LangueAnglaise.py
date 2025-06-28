@@ -1,8 +1,8 @@
 from src.langues.Ilangue import Ilangue
 
 class LangueAnglaise(Ilangue):
-    @property
-    def salutations(self):
+    
+    def salutations(self, heure):
         return "Hello!"
     @property
     def felicitations(self):

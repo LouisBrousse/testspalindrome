@@ -1,9 +1,10 @@
 from abc import ABC, abstractmethod
+import datetime
 
 class Ilangue(ABC):
-    @property
+    
     @abstractmethod
-    def salutations(self):
+    def salutations(self, heure: datetime.time):
         pass
 
     @property

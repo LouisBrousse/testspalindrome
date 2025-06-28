@@ -1,4 +1,5 @@
 from src.langues.Ilangue import Ilangue
+import datetime
 
 class Langue_Stub(Ilangue):
     def __init__(self, salutations="", felicitations="", acquittance=""):
@@ -6,8 +7,8 @@ class Langue_Stub(Ilangue):
         self._felicitations = felicitations
         self._acquittance = acquittance
 
-    @property
-    def salutations(self):
+    
+    def salutations(self, heure: datetime.time):
         return self._salutations
 
     @property

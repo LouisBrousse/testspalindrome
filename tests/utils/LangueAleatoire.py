@@ -1,5 +1,6 @@
 import os
 from src.langues.Ilangue import Ilangue
+import datetime
 
 class LangueAleatoire(Ilangue):
     def __init__(self, length=64):
@@ -7,8 +8,8 @@ class LangueAleatoire(Ilangue):
         self._felicitations = os.urandom(length).decode('latin1', errors='ignore')
         self._acquittance = os.urandom(length).decode('latin1', errors='ignore')
 
-    @property
-    def salutations(self):
+    
+    def salutations(self, heure=datetime.time):
         return self._salutations
 
     @property

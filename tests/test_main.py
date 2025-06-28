@@ -29,7 +29,6 @@ def test_palindrome():
     Langue_Stub(),
 ])
 
-
 def test_bien_dit(langue):
     # ETANT DONNE une chaine de caractères palindrome
     chaine = "kayak"
@@ -77,6 +76,7 @@ def test_bonjour(langue, mot):
     (Langue_Stub(acquittance="test3"), "hello"),
     (Langue_Stub(acquittance="test3"), "kayak"),
 ])
+
 def test_aurevoir(langue, mot):
     # ETANT DONNE une chaine de caractères
     chaine = mot
