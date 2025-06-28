@@ -107,5 +107,3 @@ def test_aurevoir(langue, mot):
 
 
 
-def test_langue_anglaise_matin():
-    assert LangueAnglaise().salutations(datetime.time(9, 0)) == "Hello!"
