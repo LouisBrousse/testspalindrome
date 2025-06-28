@@ -2,8 +2,9 @@
 from .utils.Langue_Stub import Langue_Stub
 from .utils.LangueAleatoire import LangueAleatoire
 import datetime
-
+import random
 import pytest
+
 from .utils.DetecteurPalindrome_builder import DetecteurPalindromeBuilder 
 
 def test_nominal():
@@ -54,12 +55,25 @@ def test_non_bien_dit(langue, mot):
     # ALORS IL RENVOI la chaîne à l'envers sans félicitations
     assert  langue.felicitations not in result
 
-@pytest.mark.parametrize("langue, mot, heureTestee",[
-    (LangueAleatoire(), "hello", datetime.time(6, 0)),
-    (LangueAleatoire(), "kayak", datetime.time(6, 0)),
-    (Langue_Stub(salutations="test2"), "hello", datetime.time(6, 0)),
-    (Langue_Stub(salutations="test2"), "kayak", datetime.time(6, 0)),
-])
+
+def langues_chaînes_heures_possibles():
+    heures_remarquables = [
+        datetime.time(0, 0),
+        datetime.time(
+            random.randint(0, 23),
+            random.randint(0, 59)
+        ),
+        datetime.time(6, 0),    # matin
+        datetime.time(12, 0),   # après-midi
+        datetime.time(18, 0),   # soirée
+        datetime.time(21, 0),   # nuit
+    ]
+    for heure in heures_remarquables:
+        for mot in ["test", "kayak"]:
+            yield LangueAleatoire(), mot, heure
+            yield Langue_Stub(salutations="stub"), mot, heure
+
+@pytest.mark.parametrize("langue, mot, heureTestee", list(langues_chaînes_heures_possibles()))
 
 def test_bonjour(langue, mot, heureTestee):
     # ETANT DONNE une chaine de caractères
@@ -90,7 +104,3 @@ def test_aurevoir(langue, mot):
     # ALORS IL DIT Aurevoir après avoir répondu
     assert result.endswith(langue.acquittance)
     
-    # 6:00 - 11h59 - Matin
-    # 12:00 - 17h59 - Après-midi
-    # 18:00 - 20h59 - Soirée
-    # 21h - 5:59 - Nuit
