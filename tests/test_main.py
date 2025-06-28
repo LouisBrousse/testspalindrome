@@ -1,6 +1,7 @@
 
-from src.langues.LangueAnglaise import LangueAnglaise
-from src.langues.LangueFrancaise import LangueFrancaise
+from .utils.Langue_Stub import Langue_Stub
+from .utils.LangueAleatoire import LangueAleatoire
+
 import pytest
 from .utils.DetecteurPalindrome_builder import DetecteurPalindromeBuilder 
 
@@ -24,8 +25,8 @@ def test_palindrome():
 
 
 @pytest.mark.parametrize("langue", [
-    LangueFrancaise(),
-    LangueAnglaise(),
+    LangueAleatoire(),
+    Langue_Stub(),
 ])
 
 
@@ -33,44 +34,57 @@ def test_bien_dit(langue):
     # ETANT DONNE une chaine de caractères palindrome
     chaine = "kayak"
     # QUAND on l'envoie au détecteur de palindrome quelque soit la langue
-    fake_felicitations = "BRAVO"
-
     dp = DetecteurPalindromeBuilder().avec_langue(langue).build()
     result = dp.miroir(chaine)
-    # ALORS IL RENVOI la chaîne à l'envers avec "Bien dit!"
-    assert langue.felicitations in result
+    # ALORS IL RENVOI la chaîne à l'envers avec félicitations
+    attendu = chaine + "\n" + langue.felicitations
+    assert attendu in result
 
-@pytest.mark.parametrize("langue", [
-    LangueFrancaise(),
-    LangueAnglaise(),
+@pytest.mark.parametrize("langue, mot", [
+    (LangueAleatoire(), "hello"),
+    (Langue_Stub(felicitations= "test"), "hello"),
 ])
 
-def test_non_bien_dit(langue):
+def test_non_bien_dit(langue, mot):
     # ETANT DONNE une chaine de caractères non palindrome
-    chaine = "hello"
+    chaine = mot
     # QUAND on l'envoie au détecteur de palindrome
-    fake_felicitations = "BRAVO"
     dp = DetecteurPalindromeBuilder().avec_langue(langue).build()
     result = dp.miroir(chaine)
-    # ALORS IL RENVOI la chaîne à l'envers sans "Bien dit!"
+    # ALORS IL RENVOI la chaîne à l'envers sans félicitations
+    attendu = chaine + "\n" + langue.felicitations
+    assert mot[::-1] in result
     assert  langue.felicitations not in result
-    assert "olleh" in result
 
-# def test_bonjour():
-#     # ETANT DONNE une chaine de caractères
-#     chaine = "test"
-#     # QUAND on l'envoie au détecteur de palindrome
-#     result = DetecteurPalindrome.miroir(chaine)
-#     # ALORS IL DIT Bonjour avant de répondre
-#     assert result.startswith("Bonjour")
-#     assert "tset" in result
+@pytest.mark.parametrize("langue, mot", [
+    (LangueAleatoire(), "hello"),
+    (Langue_Stub(felicitations= "test", salutations="test2"), "hello"),
+    (Langue_Stub(felicitations= "test", salutations="test2"), "kayak"),
+])
 
-# def test_aurevoir():
-#     # ETANT DONNE une chaine de caractères
-#     chaine = "test"
-#     # QUAND on l'envoie au détecteur de palindrome
-#     result = DetecteurPalindrome.miroir(chaine)
-#     # ALORS IL DIT Aurevoir après avoir répondu
-#     assert result.endswith("Aurevoir")
-#     assert "tset" in result
+def test_bonjour(langue, mot):
+    # ETANT DONNE une chaine de caractères
+    chaine = mot
+    # QUAND on l'envoie au détecteur de palindrome
+    dp = DetecteurPalindromeBuilder().avec_langue(langue).build()
+    result = dp.miroir(chaine)
+    # ALORS IL DIT Bonjour avant de répondre
+    
+    assert result.startswith(langue.salutations)
+    assert mot[::-1] in result
+
+@pytest.mark.parametrize("langue, mot", [
+    (LangueAleatoire(), "hello"),
+    (Langue_Stub(felicitations= "test", salutations="test2", acquittance="test3"), "hello"),
+    (Langue_Stub(felicitations= "test", salutations="test2", acquittance="test3"), "kayak"),
+])
+def test_aurevoir(langue, mot):
+    # ETANT DONNE une chaine de caractères
+    chaine = mot
+    # QUAND on l'envoie au détecteur de palindrome
+    dp = DetecteurPalindromeBuilder().avec_langue(langue).build()
+    result = dp.miroir(chaine)
+    # ALORS IL DIT Aurevoir après avoir répondu
+    assert result.endswith(langue.acquittance)
+    assert mot[::-1] in result
     
