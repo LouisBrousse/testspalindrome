@@ -1,6 +1,7 @@
 
 from .utils.Langue_Stub import Langue_Stub
 from .utils.LangueAleatoire import LangueAleatoire
+from src.langues.LangueAnglaise import LangueAnglaise
 import datetime
 import random
 import pytest
@@ -81,7 +82,6 @@ def test_bonjour(langue, mot, heureTestee):
     # ET un détecteure avec une langue une heure fixe
     heure = heureTestee 
     dp = DetecteurPalindromeBuilder().avec_langue(langue).avec_heure_fixe_a(heure).build()
-
     # QUAND on l'envoie au détecteur de palindrome
     result = dp.miroir(chaine)
     # ALORS IL DIT Bonjour avant de répondre
@@ -103,4 +103,9 @@ def test_aurevoir(langue, mot):
     result = dp.miroir(chaine)
     # ALORS IL DIT Aurevoir après avoir répondu
     assert result.endswith(langue.acquittance)
-    
+
+
+
+
+def test_langue_anglaise_matin():
+    assert LangueAnglaise().salutations(datetime.time(9, 0)) == "Hello!"
